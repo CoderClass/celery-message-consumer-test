@@ -412,6 +412,7 @@ class AMQPRetryHandler(object):
         """
         Put the message onto the retry queue
         """
+        _logger.warning('======> [requeue] - body: {} - msg: {} - reason: {}'.format(body, message, reason))
         _logger.warning(reason)
         try:
             retry_count = self.retry_count(message)
@@ -447,6 +448,7 @@ class AMQPRetryHandler(object):
         """
         Put the message onto the archive queue
         """
+        _logger.warning('======> [archive] - body: {} - msg: {} - reason: {}'.format(body, message, reason))
         try:
             dlx_name = settings.DEAD_LETTER_EXCHANGE.get('exchange', DEFAULT_EXCHANGE)
             dlx_postfix = settings.DEAD_LETTER_EXCHANGE.get('exchangePostfix', '')
